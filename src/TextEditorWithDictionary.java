@@ -3,6 +3,9 @@ import java.awt.*;
 import java.awt.event.ActionEvent;
 import java.awt.event.ActionListener;
 import java.util.HashSet;
+import java.io.File;
+import java.io.FileNotFoundException;
+import java.util.Scanner;
 
 public class TextEditorWithDictionary extends JFrame {
 
@@ -16,6 +19,21 @@ public class TextEditorWithDictionary extends JFrame {
         dictionary.add("java");
         dictionary.add("editor");
         dictionary.add("texto");
+
+        try {
+            File arquivo = new File("/OneDrive-Personal/Documentos/dicionario/src/palavras.txt");
+            Scanner leitor = new Scanner(arquivo);
+
+            while (leitor.hasNextLine()) {
+                String linha = leitor.nextLine();
+                dictionary.add(linha);
+                System.out.println(linha);
+            }
+
+            leitor.close();
+        } catch (FileNotFoundException e) {
+            System.out.println("Arquivo não encontrado.");
+        }
 
         setTitle("Editor de Texto com Dicionário");
         setDefaultCloseOperation(JFrame.EXIT_ON_CLOSE);
